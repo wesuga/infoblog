@@ -4,8 +4,8 @@ import com.wesju.infoblog.dto.UserRegisterDto;
 import com.wesju.infoblog.model.Role;
 import com.wesju.infoblog.model.User;
 import com.wesju.infoblog.repository.UserRepository;
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
   public User save(UserRegisterDto userRegisterDto) {
     User user = new User(userRegisterDto.getFirstName(), userRegisterDto.getLastName(),
         userRegisterDto.getEmail(), passwordEncoder.encode(userRegisterDto.getPassword()),
-        Arrays.asList(new Role("ROLE_USER")));
+        Collections.singletonList(new Role("ROLE_USER")));
 
     return userRepository.save(user);
   }
