@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <title>Go blog!</title>
@@ -10,10 +11,13 @@
   <div class="container-fluid">
     <a th:href="@{#}" class="navbar-brand">Infoblog</a>
     <ul class="nav navbar-nav navbar-right">
-      <li class="active"><a th:href="@{/login}">Login</a></li>
+      <li class="active" sec:authorize="isAnonymous()"><a th:href="@{/login}">Login</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a th:href="@{/register}">Register</a></li>
+      <li sec:authorize="isAnonymous()"><a th:href="@{/register}">Register</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
     </ul>
   </div>
 </nav>
