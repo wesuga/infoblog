@@ -1,6 +1,7 @@
 package com.wesju.infoblog.config;
 
 import com.wesju.infoblog.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -17,7 +18,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private UserService userService;
 
-  public SecurityConfig(UserService userService) {
+  @Autowired
+  public void setUserService(UserService userService) {
     this.userService = userService;
   }
 

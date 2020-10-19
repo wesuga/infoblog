@@ -18,11 +18,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
-  private final BCryptPasswordEncoder passwordEncoder;
+  private BCryptPasswordEncoder passwordEncoder;
+
+  private UserServiceImpl(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   @Autowired
-  private UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
-    this.userRepository = userRepository;
+  public void setPasswordEncoder(
+      BCryptPasswordEncoder passwordEncoder) {
     this.passwordEncoder = passwordEncoder;
   }
 
