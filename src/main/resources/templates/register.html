@@ -6,16 +6,16 @@
   <link rel="stylesheet" th:href="@{webjars/bootstrap/3.4.1/css/bootstrap.css}">
 </head>
 <body>
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <a th:href="@{#}" class="navbar-brand">Infoblog</a>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a th:href="@{/}">Home</a></li>
-    </ul>
-  </div>
-</nav>
-
 <div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <a th:href="@{#}" class="navbar-brand">Infoblog</a>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="@{/}">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <form th:action="@{/register}" method="POST" th:object="${user}">
