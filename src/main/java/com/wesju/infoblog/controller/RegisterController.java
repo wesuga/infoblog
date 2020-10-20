@@ -20,6 +20,9 @@ public class RegisterController {
 
   @GetMapping
   public String register(Model model) {
+    if (LoginController.isAuthenticated()) {
+      return "redirect:/";
+    }
     model.addAttribute("user", new UserRegisterDto());
     return "register";
   }
