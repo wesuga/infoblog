@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Go blog!</title>
+  <link rel="stylesheet" th:href="@{webjars/bootstrap/3.4.1/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <a th:href="@{#}" class="navbar-brand">Infoblog</a>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="@{/}">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <form th:action="@{/post}" method="POST" th:object="${post}">
+        <div class="form-group">
+          <label class="control-label" for="title">Title:</label>
+          <input id="title" class="form-control" th:field="*{title}"
+                 required autofocus="autofocus"/>
+        </div>
+
+        <div class="form-group">
+          <label class="control-label" for="body">Body:</label>
+          <textarea id="body" class="form-control" rows="3" th:field="*{body}" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-success">Post</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+</body>
+</html>
