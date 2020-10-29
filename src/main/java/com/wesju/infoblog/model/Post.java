@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
+import lombok.ToString.Exclude;
 import org.hibernate.annotations.CreationTimestamp;
 
 @Data
@@ -30,6 +31,7 @@ public class Post {
   @Column(name = "date_created")
   private LocalDateTime dateCreated;
 
+  @Exclude
   @ManyToOne
   @JoinColumn(name = "user_id", referencedColumnName = "id")
   private User user;
