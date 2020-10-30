@@ -4,6 +4,8 @@ import com.wesju.infoblog.model.Post;
 import com.wesju.infoblog.repository.PostRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
+
 @Service
 public class PostServiceImpl implements PostService{
   private final PostRepository postRepository;
@@ -15,5 +17,10 @@ public class PostServiceImpl implements PostService{
   @Override
   public Post save(Post post) {
     return postRepository.save(post);
+  }
+
+  @Override
+  public Collection<Post> getAll() {
+    return postRepository.findAllByOrderByDateCreatedDesc();
   }
 }
