@@ -1,10 +1,10 @@
 package com.wesju.infoblog.service;
 
 import com.wesju.infoblog.model.Post;
-
-import java.util.Collection;
+import org.springframework.data.domain.Page;
 
 public interface PostService {
   Post save(Post post);
-  Collection<Post> getAll();
+
+  Page<Post> findAllPaginated(int page);
 }
