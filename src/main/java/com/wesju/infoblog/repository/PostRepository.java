@@ -1,10 +1,7 @@
 package com.wesju.infoblog.repository;
 
 import com.wesju.infoblog.model.Post;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
-import java.util.Collection;
-
-public interface PostRepository extends CrudRepository<Post, Long> {
-    Collection<Post> findAllByOrderByDateCreatedDesc();
+public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
 }
