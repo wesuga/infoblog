@@ -8,6 +8,8 @@
 </head>
 <body>
 <div class="container">
+
+  <!--  navigation  -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <a th:href="@{#}" class="navbar-brand">Infoblog</a>
@@ -26,6 +28,7 @@
     </div>
   </nav>
 
+  <!--  posts  -->
   <div class="jumbotron" th:each="post : ${posts}">
     <h1 th:text="${post.title}">Title</h1>
     <h5 th:text="'Published on ' + ${#temporals.format(post.dateCreated, 'yyyy-MMMM-dd')}
@@ -35,6 +38,21 @@
                                  + ${post.user?.lastName}">Published on and created by</h5>
     <p th:text="${post.body}">...</p>
   </div>
+
+  <!--  pagination  -->
+  <nav aria-label="Page navigation" th:if="${totalPages > 1}">
+    <ul class="pagination" th:each="pageNum : ${#numbers.sequence(1, totalPages)}">
+      <li>
+        <a th:if="${currentPage != pageNum}" th:href="@{'/?page=' + ${pageNum}}">
+          [[ ${pageNum} ]]
+        </a>
+        <a th:unless="${currentPage != pageNum}" th:href="@{'/?page=' + ${pageNum}}">
+          [[ ${pageNum} ]]
+        </a>
+      </li>
+    </ul>
+  </nav>
+
 </div>
 </body>
 </html>
