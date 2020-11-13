@@ -2,6 +2,7 @@ package com.wesju.infoblog.service;
 
 import com.wesju.infoblog.model.Post;
 import com.wesju.infoblog.repository.PostRepository;
+import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -13,6 +14,11 @@ public class PostServiceImpl implements PostService {
 
   public PostServiceImpl(PostRepository postRepository) {
     this.postRepository = postRepository;
+  }
+
+  @Override
+  public Optional<Post> findById(Long id) {
+    return postRepository.findById(id);
   }
 
   @Override
