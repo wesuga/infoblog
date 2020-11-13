@@ -7,6 +7,8 @@
 </head>
 <body>
 <div class="container">
+
+  <!--  navigation  -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <a th:href="@{#}" class="navbar-brand">Infoblog</a>
@@ -16,16 +18,17 @@
     </div>
   </nav>
 
+  <!--  login form  -->
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <form th:action="@{/login}" method="post">
 
-        <!-- error message -->
+        <!--  error message  -->
         <div th:if="${param.error}">
           <div class="alert alert-danger">Invalid username or password</div>
         </div>
 
-        <!-- logout message -->
+        <!--  logout message  -->
         <div th:if="${param.logout}">
           <div class="alert alert-info">You have been logged out.</div>
         </div>
@@ -57,6 +60,7 @@
       </div>
     </div>
   </div>
+
 </div>
 </body>
 </html>

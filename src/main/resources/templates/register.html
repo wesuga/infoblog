@@ -7,6 +7,8 @@
 </head>
 <body>
 <div class="container">
+
+  <!--  navigation  -->
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <a th:href="@{#}" class="navbar-brand">Infoblog</a>
@@ -16,6 +18,7 @@
     </div>
   </nav>
 
+  <!--  register form  -->
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <form th:action="@{/register}" method="POST" th:object="${user}">
@@ -51,6 +54,7 @@
       </form>
     </div>
   </div>
+
 </div>
 </body>
 </html>
