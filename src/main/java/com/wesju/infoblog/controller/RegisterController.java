@@ -7,10 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/register")
 public class RegisterController {
   private UserService userService;
 
@@ -18,7 +16,7 @@ public class RegisterController {
     this.userService = userService;
   }
 
-  @GetMapping
+  @GetMapping("/register")
   public String register(Model model) {
     if (LoginController.isAuthenticated()) {
       return "redirect:/";
@@ -27,7 +25,7 @@ public class RegisterController {
     return "register";
   }
 
-  @PostMapping
+  @PostMapping("/register")
   public String registerUserAccount(@ModelAttribute("user") UserRegisterDto userRegisterDto) {
     userService.save(userRegisterDto);
     return "redirect:/login";

@@ -10,10 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/post")
 public class PostController {
   private final PostService postService;
   private final UserService userService;
@@ -23,7 +21,7 @@ public class PostController {
     this.userService = userService;
   }
 
-  @GetMapping
+  @GetMapping("/new")
   public String showPostForm(Model model, Principal principal) {
     User user = userService.findByEmail(principal.getName());
 
@@ -33,7 +31,7 @@ public class PostController {
     return "postform";
   }
 
-  @PostMapping
+  @PostMapping("/new")
   public String createPost(@ModelAttribute("post") Post post) {
     postService.save(post);
     return "redirect:/";
