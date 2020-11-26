@@ -5,10 +5,12 @@ import com.wesju.infoblog.model.User;
 import com.wesju.infoblog.service.PostService;
 import com.wesju.infoblog.service.UserService;
 import java.security.Principal;
+import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -35,5 +37,14 @@ public class PostController {
   public String createPost(@ModelAttribute("post") Post post) {
     postService.save(post);
     return "redirect:/";
+  }
+
+  @GetMapping("/post/{id}")
+  public String displayPostWithComments(@PathVariable Long id, Model model) {
+    Optional<Post> optionalPost = postService.findById(id);
+
+    Post post = optionalPost.get();
+    model.addAttribute("post", post);
+    return "post";
   }
 }

@@ -30,7 +30,7 @@
 
   <!--  posts  -->
   <div class="jumbotron" th:each="post : ${posts}">
-    <h1 th:text="${post.title}">Title</h1>
+    <h1><a th:text="${post.title}" th:href="@{'/post/' + ${post.id}}">Title</a></h1>
     <h5 th:text="'Published on ' + ${#temporals.format(post.dateCreated, 'yyyy-MMMM-dd')}
                                  + ' by '
                                  + ${post.user?.firstName}
