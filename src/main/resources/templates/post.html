@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+  <meta charset="UTF-8">
+  <title>Go blog!</title>
+  <link rel="stylesheet" th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.css}">
+</head>
+<body>
+<div class="container">
+
+  <!--  navigation  -->
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <a th:href="@{#}" class="navbar-brand">Infoblog</a>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a th:href="@{/}">Home</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!--  post  -->
+  <div class="jumbotron">
+    <h1 th:text="${post.title}">Title</h1>
+    <h5 th:text="'Published on ' + ${#temporals.format(post.dateCreated, 'yyyy-MMMM-dd')}
+                                 + ' by '
+                                 + ${post.user?.firstName}
+                                 + ' '
+                                 + ${post.user?.lastName}">Published on and created by</h5>
+    <p th:text="${post.body}">...</p>
+  </div>
+
+  <!--  comments  -->
+  <h2>Comments:</h2>
+  <div class="well" th:each="comment : ${post.comments}">
+    <h3 th:text="${comment.body}">Body</h3>
+    <h5 th:text="'Published on ' + ${#temporals.format(comment.dateCreated, 'yyyy-MMMM-dd')}
+                                 + ' by '
+                                 + ${comment.user?.firstName}
+                                 + ' '
+                                 + ${comment.user?.lastName}">Published on and created by</h5>
+  </div>
+
+  <!--  comment button  -->
+  <div sec:authorize="isAuthenticated()">
+    <div class="row">
+      <a th:href="@{'/post/{id}/comment'(id=${post.id})}" class="col-md-2">
+        <button type="button" class="btn btn-primary btn-block" th:text="Comment">
+          Comment
+        </button>
+      </a>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
