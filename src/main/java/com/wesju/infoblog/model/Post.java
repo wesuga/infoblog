@@ -34,7 +34,7 @@ public class Post {
   private String body;
 
   @CreationTimestamp
-  @Column(name = "date_created")
+  @Column(name = "date_created", updatable = false)
   private LocalDateTime dateCreated;
 
   @ManyToOne(fetch = FetchType.LAZY)
