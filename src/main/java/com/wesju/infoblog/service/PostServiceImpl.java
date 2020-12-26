@@ -36,4 +36,9 @@ public class PostServiceImpl implements PostService {
   public int subtractPageByOne(int page) {
     return (page < 1) ? 0 : page - 1;
   }
+
+  @Override
+  public void delete(Post post) {
+    postRepository.delete(post);
+  }
 }

@@ -28,6 +28,15 @@
                                  + ' '
                                  + ${post.user?.lastName}">Published on and created by</h5>
     <p th:text="${post.body}">...</p>
+
+    <!--  only show these buttons if the user is the owner of post  -->
+    <div sec:authorize="isAuthenticated()" th:if="${username}">
+      <div class="row">
+        <a th:href="@{'/post/{id}/update'(id=${post.id})}" class="col-md-2">
+          <button type="button" class="btn btn-primary btn-block" th:text="Update">Update</button>
+        </a>
+      </div>
+    </div>
   </div>
 
   <!--  comments  -->

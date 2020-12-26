@@ -10,4 +10,6 @@ public interface PostService {
   Page<Post> findAllPaginated(int page);
 
   Optional<Post> findById(Long id);
+
+  void delete(Post post);
 }

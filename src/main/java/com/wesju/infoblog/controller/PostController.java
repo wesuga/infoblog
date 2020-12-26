@@ -8,6 +8,7 @@ import java.security.Principal;
 import java.util.Optional;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,11 +41,50 @@ public class PostController {
   }
 
   @GetMapping("/post/{id}")
-  public String displayPostWithComments(@PathVariable Long id, Model model) {
+  public String displayPostWithComments(@PathVariable Long id, Model model, Principal principal) {
     Optional<Post> optionalPost = postService.findById(id);
 
     Post post = optionalPost.get();
+
     model.addAttribute("post", post);
+    if (isPrincipalOwnerOfPost(principal, post)) {
+      model.addAttribute("username", principal.getName());
+    }
     return "post";
+  }
+
+  @GetMapping("/post/{id}/update")
+  public String updatePostWithId(@PathVariable Long id, Principal principal, Model model) {
+
+    Optional<Post> optionalPost = postService.findById(id);
+
+    if (optionalPost.isPresent()) {
+      Post post = optionalPost.get();
+
+      if (isPrincipalOwnerOfPost(principal, post)) {
+        model.addAttribute("post", post);
+        return "postform";
+      }
+    }
+    return "error";
+  }
+
+  @DeleteMapping("/post/{id}")
+  public String deletePost(@PathVariable Long id, Principal principal) {
+    Optional<Post> optionalPost = postService.findById(id);
+
+    if (optionalPost.isPresent()) {
+      Post post = optionalPost.get();
+
+      if (isPrincipalOwnerOfPost(principal, post)) {
+        postService.delete(post);
+        return "redirect:/";
+      }
+    }
+    return "error";
+  }
+
+  private boolean isPrincipalOwnerOfPost(Principal principal, Post post) {
+    return principal != null && principal.getName().equals(post.getUser().getEmail());
   }
 }
